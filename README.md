@@ -1,5 +1,10 @@
 # rollup-plugin-terser
 
+[![Build and Test](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/ci.yml/badge.svg)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/ci.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sjinks_rollup-plugin-terser&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sjinks_rollup-plugin-terser)
+[![CodeQL Analysis](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/codeql-analysis.yml)
+[![Dependency Review](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/dependency-review.yml)
+
 A Rollup plugin to minify the generated bundle with Terser.
 
 This is a complete rewrite of [TrySound/rollup-plugin-terser](https://github.com/TrySound/rollup-plugin-terser).
