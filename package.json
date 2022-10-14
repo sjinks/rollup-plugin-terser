@@ -1,0 +1,55 @@
+{
+  "name": "@wwa/rollup-plugin-terser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dit/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist/src/*.d.ts",
+    "dist/src/*.js",
+    "dist/src/*.js.map"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "pretest": "npm run lint",
+    "test": "jest",
+    "posttest": "npm run build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepack": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjinks/rollup-plugin-terser.git"
+  },
+  "keywords": [
+    "rollup-plugin"
+  ],
+  "author": "Volodymyr Kolesnykov <volodymyr@wildwolf.name> (https://wildwolf.name/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjinks/rollup-plugin-terser/issues"
+  },
+  "homepage": "https://github.com/sjinks/rollup-plugin-terser#readme",
+  "devDependencies": {
+    "@myrotvorets/eslint-config-myrotvorets-ts": "^2.14.0",
+    "@types/babel__code-frame": "^7.0.3",
+    "@types/jest": "^29.1.2",
+    "jest": "^29.2.0",
+    "jest-github-actions-reporter": "^1.0.3",
+    "jest-sonar-reporter": "^2.0.0",
+    "rollup": "^3.0.0",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.8.4"
+  },
+  "peerDependencies": {
+    "rollup": "^2.0.0 || ^3.0.0"
+  },
+  "dependencies": {
+    "@babel/code-frame": "^7.18.6",
+    "terser": "^5.15.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
