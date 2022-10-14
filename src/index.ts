@@ -10,9 +10,7 @@ interface TesrerError extends Error {
 }
 
 function buildOptions(pluginOptions: Options, outputOptions: NormalizedOutputOptions): MinifyOptions {
-    const options: MinifyOptions = {
-        sourceMap: outputOptions.sourcemap === true || typeof outputOptions.sourcemap === 'string',
-    };
+    const options: MinifyOptions = {};
 
     if (/^esm?$/u.test(outputOptions.format)) {
         options.module = true;
@@ -22,7 +20,11 @@ function buildOptions(pluginOptions: Options, outputOptions: NormalizedOutputOpt
         options.toplevel = true;
     }
 
-    return { ...options, ...pluginOptions };
+    return {
+        ...options,
+        ...pluginOptions,
+        sourceMap: outputOptions.sourcemap === true || typeof outputOptions.sourcemap === 'string',
+    };
 }
 
 export function terser(pluginOptions: Options = {}): Plugin {
