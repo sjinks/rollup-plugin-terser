@@ -1,0 +1,56 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the source code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b # tag=v3.5.0
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Retrieve information from package.json
+        uses: myrotvorets/info-from-package-json-action@ac520d803506a6f636b89cf1c1b63dd6c2d7d053 # tag=1.1.1
+        id: ver
+
+      - name: Fix paths in test-report.xml
+        run: sed -i "s@$(pwd)@/github/workspace@g" test-report.xml
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectName=${{ steps.ver.outputs.packageName }}
+            -Dsonar.projectVersion=${{ steps.ver.outputs.packageVersion }}
+            -Dsonar.links.homepage=${{ steps.ver.outputs.packageHomepage }}
+            -Dsonar.links.issue=${{ steps.ver.outputs.packageBugsUrl }}
+            -Dsonar.links.scm=${{ steps.ver.outputs.packageScmUrl }}
