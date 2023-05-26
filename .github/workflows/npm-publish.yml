@@ -63,7 +63,7 @@ jobs:
     environment: ${{ matrix.registry }}
     steps:
       - name: Set commit status to PENDING
-        uses: myrotvorets/set-commit-status-action@7d7fe9a321fbe56a1339449c19422e95a025c65a # 1.1.6
+        uses: myrotvorets/set-commit-status-action@243b4f7e597f62335408d58001edf8a02cf3e1fd # v1.1.7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           status: pending
@@ -90,7 +90,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets[matrix.secret] }}
 
       - name: Set final commit status
-        uses: myrotvorets/set-commit-status-action@7d7fe9a321fbe56a1339449c19422e95a025c65a # 1.1.6
+        uses: myrotvorets/set-commit-status-action@243b4f7e597f62335408d58001edf8a02cf3e1fd # v1.1.7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           status: ${{ job.status }}
