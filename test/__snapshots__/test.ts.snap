@@ -17,6 +17,7 @@ exports[`works with code splitting 1`] = `
     "name": "chunk-1",
     "preliminaryFileName": "chunk-1.js",
     "referencedFiles": [],
+    "sourcemapFileName": null,
     "type": "chunk",
   },
   "chunk-2.js": {
@@ -34,6 +35,7 @@ exports[`works with code splitting 1`] = `
     "name": "chunk-2",
     "preliminaryFileName": "chunk-2.js",
     "referencedFiles": [],
+    "sourcemapFileName": null,
     "type": "chunk",
   },
 }
