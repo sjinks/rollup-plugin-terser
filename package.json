@@ -43,7 +43,7 @@
     "typescript": "^5.0.0"
   },
   "peerDependencies": {
-    "rollup": "^4.0.0"
+    "rollup": "^2.0.0 || ^3.0.0 || ^4.0.0"
   },
   "dependencies": {
     "@babel/code-frame": "^7.18.6",
