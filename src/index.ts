@@ -43,7 +43,8 @@ export function terser(pluginOptions: Options = {}): Plugin {
                         map: result.map,
                     };
                 })
-                .catch((error: TesrerError) => {
+                .catch((e: unknown) => {
+                    const error = e as TesrerError;
                     const { message, line, col: column } = error;
                     console.error(codeFrameColumns(code, { start: { line, column } }, { message }));
                     throw error;
