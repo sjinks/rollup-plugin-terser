@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/sjinks/rollup-plugin-terser#readme",
   "devDependencies": {
-    "@myrotvorets/eslint-config-myrotvorets-ts": "^2.14.0",
+    "@myrotvorets/eslint-config-myrotvorets-ts": "^3.0.0",
     "@types/babel__code-frame": "^7.0.3",
     "@types/jest": "^29.1.2",
     "jest": "^29.2.0",
