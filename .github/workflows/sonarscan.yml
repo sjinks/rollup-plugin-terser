@@ -36,7 +36,7 @@ jobs:
         run: npm test
 
       - name: Retrieve information from package.json
-        uses: myrotvorets/info-from-package-json-action@034d387166c2b69451951baca17fd65c67eefdef # 2.0.1
+        uses: myrotvorets/info-from-package-json-action@8c0495f8c31c3b5e01e4b5dbb9dddb269089cffb # v2.0.2
         id: ver
 
       - name: Fix paths in test-report.xml
