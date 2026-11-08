@@ -192,6 +192,7 @@ test('throw error on terser fail', async () => {
 
     expect(consoleWarnSpy).toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('var = 1'));
 });
 
 test('throw error on terser fail with multiple outputs', async () => {

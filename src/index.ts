@@ -1,6 +1,5 @@
-import { codeFrameColumns } from '@babel/code-frame';
 import type { NormalizedOutputOptions, Plugin, RenderedChunk } from 'rollup';
-import { MinifyOptions, minify } from 'terser';
+import type { MinifyOptions } from 'terser' with { 'resolution-mode': 'import' };
 
 export type Options = Omit<MinifyOptions, 'sourceMap'>;
 
@@ -30,8 +29,9 @@ function buildOptions(pluginOptions: Options, outputOptions: NormalizedOutputOpt
 export function terser(pluginOptions: Options = {}): Plugin {
     return {
         name: 'terser',
-        renderChunk(code: string, _chunk: RenderedChunk, outputOptions: NormalizedOutputOptions) {
+        async renderChunk(code: string, _chunk: RenderedChunk, outputOptions: NormalizedOutputOptions) {
             const options = buildOptions(pluginOptions, outputOptions);
+            const { minify } = await import('terser');
             return minify(code, options)
                 .then((result) => {
                     if (options.nameCache) {
@@ -43,9 +43,10 @@ export function terser(pluginOptions: Options = {}): Plugin {
                         map: result.map,
                     };
                 })
-                .catch((e: unknown) => {
+                .catch(async (e: unknown) => {
                     const error = e as TesrerError;
                     const { message, line, col: column } = error;
+                    const { codeFrameColumns } = await import('@babel/code-frame');
                     console.error(codeFrameColumns(code, { start: { line, column } }, { message }));
                     throw error;
                 });
