@@ -1,5 +1,5 @@
 import type { NormalizedOutputOptions, Plugin, RenderedChunk } from 'rollup';
-import type { MinifyOptions } from 'terser' with { 'resolution-mode': 'import' };
+import { type MinifyOptions, minify } from 'terser';
 
 export type Options = Omit<MinifyOptions, 'sourceMap'>;
 
@@ -31,25 +31,25 @@ export function terser(pluginOptions: Options = {}): Plugin {
         name: 'terser',
         async renderChunk(code: string, _chunk: RenderedChunk, outputOptions: NormalizedOutputOptions) {
             const options = buildOptions(pluginOptions, outputOptions);
-            const { minify } = await import('terser');
-            return minify(code, options)
-                .then((result) => {
-                    if (options.nameCache) {
-                        pluginOptions.nameCache = { ...options.nameCache };
-                    }
+            try {
+                const result = await minify(code, options);
 
-                    return {
-                        code: result.code,
-                        map: result.map,
-                    };
-                })
-                .catch(async (e: unknown) => {
-                    const error = e as TesrerError;
-                    const { message, line, col: column } = error;
-                    const { codeFrameColumns } = await import('@babel/code-frame');
-                    console.error(codeFrameColumns(code, { start: { line, column } }, { message }));
-                    throw error;
-                });
+                if (options.nameCache) {
+                    // eslint-disable-next-line require-atomic-updates
+                    pluginOptions.nameCache = { ...options.nameCache };
+                }
+
+                return {
+                    code: result.code,
+                    map: result.map,
+                };
+            } catch (e: unknown) {
+                const error = e as TesrerError;
+                const { message, line, col: column } = error;
+                const { codeFrameColumns } = await import('@babel/code-frame');
+                console.error(codeFrameColumns(code, { start: { line, column } }, { message }));
+                throw error;
+            }
         },
     } as Plugin;
 }
