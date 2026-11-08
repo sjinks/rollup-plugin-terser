@@ -135,6 +135,10 @@ void test('minify with sourcemaps', async () => {
     equal(output.map?.mappings, 'aAEAA,QAAQC,ICFO');
     deepEqual(output.map.names, ['console', 'log']);
     deepEqual(output.map.sources, ['test/fixtures/sourcemap.js', 'test/fixtures/export-number.js']);
+    deepEqual(output.map.sourcesContent, [
+        "import result from './export-number.js';\n\nconsole.log(result);\n",
+        'export default 5;\n',
+    ]);
     equal(output.map.file, 'sourcemap.js');
     equal(output.map.version, 3);
 });
@@ -152,6 +156,10 @@ void test('work with sourcemap: "inline"', async () => {
     equal(output.map?.mappings, 'aAEAA,QAAQC,ICFO');
     deepEqual(output.map.names, ['console', 'log']);
     deepEqual(output.map.sources, ['test/fixtures/sourcemap.js', 'test/fixtures/export-number.js']);
+    deepEqual(output.map.sourcesContent, [
+        "import result from './export-number.js';\n\nconsole.log(result);\n",
+        'export default 5;\n',
+    ]);
     equal(output.map.file, 'sourcemap.js');
     equal(output.map.version, 3);
 });

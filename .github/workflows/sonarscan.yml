@@ -13,10 +13,15 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
-  build:
+  scan:
     name: SonarCloud Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Check out the source code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -38,9 +43,6 @@ jobs:
       - name: Retrieve information from package.json
         uses: myrotvorets/info-from-package-json-action@8c0495f8c31c3b5e01e4b5dbb9dddb269089cffb # v2.0.2
         id: ver
-
-      - name: Fix paths in test-report.xml
-        run: sed -i "s@$(pwd)@/github/workspace@g" test-report.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e # master

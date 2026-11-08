@@ -1,5 +1,6 @@
 /.vscode/
 /coverage/
+/lcov.info
 /dist/
 /node_modules/
 /test-report.xml
