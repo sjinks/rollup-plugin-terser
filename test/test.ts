@@ -401,7 +401,7 @@ void test('terser updates the nameCache object', async () => {
 
     const result = await bundle.generate({ format: 'es' });
     equal(result.output[0].code.trim(), `console.log({o:1,f:2});`);
-    deepEqual(nameCache, {
+    deepEqual(structuredClone(nameCache), {
         props: {
             props: {
                 $_priv: 'f',
@@ -432,7 +432,7 @@ void test('omits populates an empty nameCache object', async () => {
 
     const result = await bundle.generate({ format: 'es' });
     equal(result.output[0].code.trim(), `console.log({o:1,i:2},function o(n){return n>0?o(n-1):n}(10));`);
-    deepEqual(nameCache, {
+    deepEqual(structuredClone(nameCache), {
         props: {
             props: {
                 $_priv: 'i',
@@ -470,7 +470,7 @@ void test('terser preserve vars in nameCache when provided', async () => {
 
     const result = await bundle.generate({ format: 'es' });
     equal(result.output[0].code.trim(), `console.log({o:1,i:2},function o(n){return n>0?o(n-1):n}(10));`);
-    deepEqual(nameCache, {
+    deepEqual(structuredClone(nameCache), {
         props: {
             props: {
                 $_priv: 'i',
