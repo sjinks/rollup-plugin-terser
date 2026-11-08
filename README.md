@@ -16,6 +16,8 @@ Main differences:
 
 ## Installation
 
+Requires Node.js 22.18 or later in the 22.x series, or Node.js 24.11 or later.
+
 ```bash
 npm i -D @wwa/rollup-plugin-terser
 ```

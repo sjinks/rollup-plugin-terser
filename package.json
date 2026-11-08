@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "pretest": "npm run lint",
-    "test": "jest",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "posttest": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -27,6 +27,9 @@
   ],
   "author": "Volodymyr Kolesnykov <volodymyr@wildwolf.name> (https://wildwolf.name/)",
   "license": "ISC",
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
+  },
   "bugs": {
     "url": "https://github.com/sjinks/rollup-plugin-terser/issues"
   },

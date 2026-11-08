@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
         "target": "es2019",
-        "module": "CommonJS",
+        "module": "Node16",
         "noEmitOnError": true,
         "outDir": "./dist",
         "sourceMap": true,
         "declaration": true,
         "removeComments": true,
         "strict": true,
+        "isolatedModules": true,
         "noUnusedLocals": true,
         "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
