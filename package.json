@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "pretest": "npm run lint",
-    "test": "tsx --test test/test.ts",
+    "test": "node --import tsx --test --experimental-test-coverage --test-reporter=spec --test-reporter=junit --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=test-report.xml --test-reporter-destination=lcov.info test/test.ts",
     "posttest": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
