@@ -1,22 +1,17 @@
 # rollup-plugin-terser
 
-[![Build and Test](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/ci.yml/badge.svg)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/ci.yml)
+[![Build and Test](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/ci.yml?query=branch%3Amaster)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sjinks_rollup-plugin-terser&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sjinks_rollup-plugin-terser)
-[![CodeQL Analysis](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/codeql-analysis.yml)
-[![Dependency Review](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/sjinks/rollup-plugin-terser/actions/workflows/dependency-review.yml)
 
 A Rollup plugin to minify the generated bundle with Terser.
 
 This is a complete rewrite of [TrySound/rollup-plugin-terser](https://github.com/TrySound/rollup-plugin-terser).
 
-Main differences:
-  * the code is written in TypeScript;
-  * this plugin supports both Rollup 2 and Rollup 3;
-  * the implementation is more lightweight and probably less resource-consuming, but it does not use workers (therefore, it could be slower).
+The plugin is written in TypeScript, supports Rollup 2, 3, and 4, and runs Terser without worker processes.
 
 ## Installation
 
-Requires Node.js 22.18 or later in the 22.x series, or Node.js 24.11 or later.
+Requires Rollup 2, 3, or 4 and Node.js 22.18 or later in the 22.x series, or Node.js 24.11 or later.
 
 ```bash
 npm i -D @wwa/rollup-plugin-terser
@@ -36,10 +31,7 @@ rollup({
 });
 ```
 
-`terser` accepts an optional `options` parameter, which is the [MinifyOptions object](https://github.com/terser/terser#minify-options).
+`terser` accepts an optional [Terser minify options](https://github.com/terser/terser#minify-options) object, except for `sourceMap`, which is controlled by Rollup's output options.
 
-The plugin automatically sets the following options:
-  * `module: true` if the output format is `esm` or `es`;
-  * `toplevel: true` if the output format is `cjs`;
-  * `sourcemap` is always inferred from rollup's options.
+The plugin defaults `module` to `true` for `esm` and `es` output, and `toplevel` to `true` for `cjs` output. You can override either default in the options passed to `terser`. Source map generation follows Rollup's `output.sourcemap` option.
 
