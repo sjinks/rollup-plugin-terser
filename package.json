@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "pretest": "npm run lint",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test": "tsx --test test/test.ts",
     "posttest": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -26,7 +26,7 @@
     "rollup-plugin"
   ],
   "author": "Volodymyr Kolesnykov <volodymyr@wildwolf.name> (https://wildwolf.name/)",
-  "license": "ISC",
+  "license": "MIT",
   "engines": {
     "node": "^22.18.0 || >=24.11.0"
   },
@@ -37,13 +37,10 @@
   "devDependencies": {
     "@myrotvorets/eslint-config-myrotvorets-ts": "^4.0.0",
     "@types/babel__code-frame": "^7.0.3",
-    "@types/jest": "^30.0.0",
-    "jest": "^30.0.0",
-    "jest-github-actions-reporter": "^1.0.3",
-    "jest-sonar-reporter": "^2.0.0",
+    "@types/node": "^26.6.6",
     "rollup": "^4.0.0",
-    "ts-jest": "^29.0.3",
-    "typescript": "^5.0.0"
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "rollup": "^2.0.0 || ^3.0.0 || ^4.0.0"
@@ -55,5 +52,8 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
